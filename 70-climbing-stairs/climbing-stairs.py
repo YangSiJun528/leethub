@@ -2,12 +2,10 @@ class Solution:
     def climbStairs(self, n: int) -> int:
         cnt = 0
         mem = {-1:0, 0:0, 1:1, 2:2}
-        def cnt_stairs(num):
+        for num in range(3, n+1):
             if num not in mem:
-                mem[num] = cnt_stairs(num-1) + cnt_stairs(num-2)
-            return mem[num]
-
-        return cnt_stairs(n)
+                mem[num] = mem[num-1] + mem[num-2]
+        return mem[n]
 
 # 2^45 = 3.5184372e+13 -> 완전탐색으로 불가능
 
