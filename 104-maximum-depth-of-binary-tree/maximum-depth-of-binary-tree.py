@@ -1,4 +1,3 @@
-import collections
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -7,17 +6,8 @@ import collections
 #         self.right = right
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        max_depth = 1
-        q = collections.deque()
         if root is None:
             return 0
-        q.append((root, max_depth))
-        while q:
-            cur_node, cur_depth = q.popleft()
-            max_depth = max(max_depth, cur_depth)
-            if cur_node.left:
-                q.append((cur_node.left, cur_depth+1))
-            if cur_node.right:
-                q.append((cur_node.right, cur_depth+1))
-        return max_depth
+        return max(self.maxDepth(root.left)+1, self.maxDepth(root.right)+1)
+
         
