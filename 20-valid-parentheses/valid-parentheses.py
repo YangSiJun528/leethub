@@ -10,8 +10,4 @@ class Solution:
                     return False
             else:
                 stack.append(c)
-        
-        if stack:
-            return False
-        return True
-        
+        return not stack
