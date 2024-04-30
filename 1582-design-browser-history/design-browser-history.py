@@ -1,14 +1,14 @@
 class BrowserHistory:
 
     def __init__(self, homepage: str):
-        self.arr = [homepage]
+        self.arr = [homepage] + [''] * 5000
         self.cur_pointer = 0
         self.max_pointer = 0
 
     def visit(self, url: str) -> None:
-        self.arr = self.arr[:self.cur_pointer+1] + [url]
         self.cur_pointer += 1
         self.max_pointer = self.cur_pointer
+        self.arr[self.cur_pointer] = url
 
     def back(self, steps: int) -> str:
         self.cur_pointer = max((self.cur_pointer - steps), 0)
