@@ -1,7 +1,7 @@
 class BrowserHistory:
 
     def __init__(self, homepage: str):
-        self.arr = [homepage] + [''] * 5000
+        self.arr = [homepage] + [None] * 5000
         self.cur_pointer = 0
         self.max_pointer = 0
 
