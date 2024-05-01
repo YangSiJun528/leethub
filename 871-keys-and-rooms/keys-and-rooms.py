@@ -1,16 +1,18 @@
+import collections
+
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        if len(rooms) == 0:
-                return True
+        visited_rooms = [False] * len(rooms)
+        visited_rooms[0] = True
+        q = collections.deque()
+        q.extend(rooms[0])
 
-        visited = set()
-        def dfs(cur_v):
-            visited.add(cur_v)
-            for v in rooms[cur_v]:
-                if v not in visited:
-                    dfs(v)
-            return len(visited) == len(rooms)
-        return dfs(0)
+        while q:
+            cur_idx = q.popleft()
+            if not visited_rooms[cur_idx]:
+                visited_rooms[cur_idx] = True
+                q.extend(rooms[cur_idx])
+        
+        return False not in visited_rooms 
 
-# 생각해보나 dict 필요없음 + 불필요한 print 제거
-# 예외 경우(rooms가 0일떄) 추가
+        
