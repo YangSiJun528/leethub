@@ -2,10 +2,8 @@ class Solution:
     def dp(self, m, n, mem):
         if m < 0 or n < 0:
             return 0
-
         if (m,n) not in mem:
             mem[(m,n)] = self.dp(m-1, n, mem) + self.dp(m, n-1, mem)
-        print(mem)
         return mem[(m,n)]
 
     def uniquePaths(self, m: int, n: int) -> int:
