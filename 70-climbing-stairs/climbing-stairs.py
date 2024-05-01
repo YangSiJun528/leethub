@@ -1,7 +1,9 @@
 class Solution:
+    def __init__(self):
+        self.mem = {1:1, 2:2, 3:3}
+
     def climbStairs(self, n: int) -> int:
-        dp = [-1, 1, 2, 3] + [-1] * (n - 3)
-        for i in range(4, n+1):
-            dp[i] = dp[i-1] + dp[i-2]
-        return dp[n]
+        if n not in self.mem:
+            self.mem[n] = self.climbStairs(n-1) + self.climbStairs(n-2)
+        return self.mem[n]
         
