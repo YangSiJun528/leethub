@@ -7,6 +7,7 @@ class Solution:
         q = collections.deque()
         q.extend(rooms[0])
 
+        # BFS
         while q:
             cur_idx = q.popleft()
             if not visited_rooms[cur_idx]:
