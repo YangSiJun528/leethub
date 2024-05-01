@@ -2,26 +2,27 @@ import collections
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        dx = [1,0,0,-1]
-        dy = [0,1,-1,0]
-        cnt = 0
+        island_cnt = 0
+        len_m = len(grid)
+        len_n = len(grid[0])
+        ways = [(-1,0), (1,0), (0,-1), (0,1)]
+        visited = set()
         q = collections.deque()
-        for x in range(len(grid)):
-            for y in range(len(grid[0])):
-                #print(grid)
-                if grid[x][y] == "1":
-                    cnt += 1
-                    q.append((x,y))
+
+        for m in range(len_m):
+            for n in range(len_n):
+                if grid[m][n] == '1' and (m, n) not in visited:
+                    island_cnt += 1
+                    # BFS Start
+                    q.append((m,n))
                     while q:
-                        cur_x, cur_y = q.popleft()
-                        for i in range(4):
-                            next_x = dx[i] + cur_x
-                            next_y = dy[i] + cur_y
-                            if next_x >= 0 and next_x < len(grid) and next_y >= 0 and next_y < len(grid[0]) and grid[next_x][next_y] == "1":
-                                q.append((next_x, next_y))
-                                grid[next_x][next_y] = "-1"
-        return cnt
+                        cur_m, cur_n = q.popleft()
+                        if (cur_m,cur_n) not in visited:
+                            visited.add((cur_m, cur_n))
+                            for way in ways:
+                                next_m, next_n = way[0]+cur_m, way[1]+cur_n
+                                if next_m >= 0 and next_n >= 0 and next_m < len_m and next_n < len_n and grid[next_m][next_n] == '1':
+                                    q.append((next_m, next_n))
+        return island_cnt
 
-
-                    
         
