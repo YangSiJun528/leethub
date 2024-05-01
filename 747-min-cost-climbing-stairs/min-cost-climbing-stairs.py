@@ -1,7 +1,16 @@
 class Solution:
+    def __init__(self):
+        self.mem = {}
+        self.cost = None
+
+    def dp(self, cur_idx):
+        if cur_idx not in self.mem:
+            self.mem[cur_idx] = min(self.dp(cur_idx-1), self.dp(cur_idx-2)) + self.cost[cur_idx]
+        return self.mem[cur_idx]
+
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        dp = cost[:2] + [1000] * (len(cost)-2)
-        for i in range(2, len(cost)): 
-            dp[i] = min(dp[i-1], dp[i-2]) + cost[i]
-        return min(dp[-1], dp[-2])
+        self.mem[0] = cost[0]
+        self.mem[1] = cost[1]
+        self.cost = cost
+        return min(self.dp(len(cost)-1), self.dp(len(cost)-2))
         
