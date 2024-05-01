@@ -13,7 +13,7 @@ class Solution:
             for n in range(len_n):
                 if grid[m][n] == '1' and (m, n) not in visited:
                     island_cnt += 1
-                    # BFS Start
+                    # DFS Start
                     s.append((m,n))
                     while s:
                         cur_m, cur_n = s.pop()
